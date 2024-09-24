@@ -45,6 +45,21 @@ class HashTable {
 
   insertWithHashCollisions(key, value) {
     // Your code here
+    // Note: The bucket will not represent the object itself.
+      // Each node is an object
+      // Nodes should be structured as a FIFO or FILO
+
+    let index = this.hashMod(key);
+    let node = new KeyValuePair(key, value);
+
+    if (this.data[index]) {
+      node.next = this.data[index];
+      this.data[index] = node;
+    } else {
+      this.data[index] = node;
+    }
+
+    this.count++;
   }
 
   insert(key, value) {
