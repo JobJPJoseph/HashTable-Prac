@@ -64,6 +64,45 @@ class HashTable {
 
   insert(key, value) {
     // Your code here
+
+    let index = this.hashMod(key);
+    let node = new KeyValuePair(key, value);
+
+    // instead of Making the Linked list longer if the same key
+    // We will just re-assign it.
+
+    const findNode = () => {
+      let current = this.data[index];
+      // let exit = false;
+
+      while(current) {
+        if (current.key === node.key) {
+          current.value = node.value
+          return 1;
+        }
+        current = current.next;
+      }
+
+      return false;
+    }
+
+    if (this.data[index]) {
+
+      // If we don't find it in the linked list we will push the node in the front
+
+
+      if(findNode()) {
+        return;
+      } else {
+        node.next = this.data[index];
+        this.data[index] = node;
+      }
+
+    } else {
+      this.data[index] = node;
+    }
+
+    this.count++;
   }
 
 }
